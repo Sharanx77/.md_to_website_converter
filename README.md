@@ -43,8 +43,10 @@
    npm run dev
    ```
 3. **Deploy:**
+   ```
    use the Live push button with you Github PAT(Personal Access Token).
-
+   ```
+   
 ---
 ## 👨‍💻 Author
 **B Sharana Basava**
@@ -56,7 +58,7 @@
 ---
 
 **🤖 AI Partnership**
-This project was co-engineered with ** Gemini AI ** to optimize rendering efficiency and UI/UX responsiveness.
+This project was co-engineered with **Gemini AI** to optimize rendering efficiency and UI/UX responsiveness.
 
-** 2026 © ECHO_COMPILER_SYSTEM **
+**2026 © ECHO_COMPILER_SYSTEM**
 
