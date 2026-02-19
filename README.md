@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 ECHO Compiler v2.1
 
-## Getting Started
+**ECHO Compiler** is a high-performance, responsive Web IDE designed to transform raw Markdown into professional developer portfolios instantly. Co-engineered by **B Sharana Basava** and **Gemini AI**, it bridges the gap between technical documentation and aesthetic web presence.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-000-white?style=for-the-badge&logo=nextdotjs)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![GitHub API](https://img.shields.io/badge/GitHub_API-181717?style=for-the-badge&logo=github&logoColor=white)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* **⚡ Efficiency Engine:** Real-time debounced rendering to prevent UI lag.
+* **🎨 Dynamic Themes:** Switch between **Modern**, **Sleek Dark**, and **Hacker Terminal** modes.
+* **📦 One-Click Deploy:** Integrated Octokit logic to push directly to GitHub Pages.
+* **💾 Local Persistence:** Auto-save functionality ensures your work is never lost.
+* **🌈 Pro Syntax Highlighting:** Visual code blocks for JS, CSS, and Markdown.
+* **📱 Responsive Design:** Built for mobile-first developer workflows.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+* **Framework:** Next.js (App Router)
+* **Styling:** Tailwind CSS + @tailwindcss/typography
+* **Markdown Engine:** React-Markdown + Remark-GFM
+* **Icons:** Lucide-React
+* **API:** GitHub Rest SDK (Octokit)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Getting Started
 
-## Deploy on Vercel
+1. **Clone & Install:**
+   ```bash
+   git clone [https://github.com/Sharanx77/echo-compiler.git](https://github.com/Sharanx77/echo-compiler.git)
+   cd echo-compiler
+   npm install
+   ```
+2. **Launch:**
+   ```
+   npm run dev
+   ```
+3. **Deploy:**
+   use the Live push button with you Github PAT(Personal Access Token).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
+## 👨‍💻 Author
+**B Sharana Basava**
+*Electronics and Communication Engineering Student*
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **LinkedIn:** [B Sharana Basava](https://www.linkedin.com/in/b-sharana-basava-b4313a325/)
+* **GitHub:** [Sharanx77](https://github.com/Sharanx77)
+* **Email:** [b.sharanabasava2006@gmail.com](mailto:b.sharanabasava2006@gmail.com)
+---
+
+**🤖 AI Partnership**
+This project was co-engineered with ** Gemini AI ** to optimize rendering efficiency and UI/UX responsiveness.
+
+** 2026 © ECHO_COMPILER_SYSTEM **
+
