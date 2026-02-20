@@ -1,7 +1,7 @@
 # 🚀 ECHO Compiler v2.1
 
 
-**WEBSITE lINK:**[.md_to_website](https://md-to-website-converter.vercel.app)
+* **WEBSITE lINK:**  [ECHO_COMPILER](https://md-to-website-converter.vercel.app)
 
 **ECHO Compiler** is a high-performance, responsive Web IDE designed to transform raw Markdown into professional developer portfolios instantly. Co-engineered by **B Sharana Basava** and **Gemini AI**, it bridges the gap between technical documentation and aesthetic web presence.
 
