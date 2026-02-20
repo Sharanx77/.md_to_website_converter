@@ -18,7 +18,7 @@ const THEMES = {
     accent: "text-indigo-700", 
     btn: "bg-indigo-600 hover:bg-indigo-700", 
     syntax: prism,
-    footerName: "text-indigo-900" // Deep Midnight Blue
+    footerName: "text-indigo-900" 
   },
   dark: { 
     wrapper: "bg-slate-950 text-slate-100", 
@@ -27,7 +27,7 @@ const THEMES = {
     accent: "text-blue-400", 
     btn: "bg-blue-600 hover:bg-blue-500", 
     syntax: vscDarkPlus,
-    footerName: "text-blue-400" // Electric Blue
+    footerName: "text-blue-400" 
   },
   terminal: { 
     wrapper: "bg-black text-green-400 font-mono", 
@@ -36,9 +36,10 @@ const THEMES = {
     accent: "text-green-500", 
     btn: "bg-green-900 hover:bg-green-800 border border-green-500", 
     syntax: vscDarkPlus,
-    footerName: "text-green-400" // Matrix Green
+    footerName: "text-green-400" 
   }
 };
+
 export default function EchoCompiler() {
   const myName = "B Sharana Basava"; 
   const aiPartner = "Gemini AI";
@@ -49,11 +50,14 @@ export default function EchoCompiler() {
   const [isDeploying, setIsDeploying] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  // PERSISTENCE & DEBOUNCE
   useEffect(() => {
     const saved = localStorage.getItem('echo-content');
-    if (saved) { setMarkdown(saved); setDebouncedMarkdown(saved); }
-    else { setMarkdown("# 🚀 ECHO Compiler Active\n\nWelcome, **" + myName + "**. Start building your portfolio."); }
+    if (saved) { 
+      setMarkdown(saved); 
+      setDebouncedMarkdown(saved); 
+    } else { 
+      setMarkdown("# 🚀 ECHO Compiler Active\n\nWelcome, **" + myName + "**. Start building your portfolio."); 
+    }
   }, []);
 
   useEffect(() => {
@@ -68,7 +72,7 @@ export default function EchoCompiler() {
 
   const generateHTMLWrapper = () => {
     const content = document.getElementById('preview-content')?.innerHTML;
-    return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Portfolio | ${myName}</title><script src="https://cdn.tailwindcss.com?plugins=typography"></script><link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"></head><body class="${THEMES[currentTheme].wrapper} p-8 md:p-16"><article class="prose ${THEMES[currentTheme].prose} mx-auto max-w-4xl">${content}</article><footer style="margin-top:5rem;text-align:center;opacity:0.4;font-family:sans-serif;font-size:0.8rem;">Compiled by ${myName} & ${aiPartner}</footer></body></html>`;
+    return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Portfolio | ${myName}</title><script src="https://cdn.tailwindcss.com?plugins=typography"></script></head><body class="${THEMES[currentTheme].wrapper} p-8 md:p-16"><article class="prose ${THEMES[currentTheme].prose} mx-auto max-w-4xl">${content}</article></body></html>`;
   };
 
   const downloadAsHTML = () => {
@@ -79,7 +83,7 @@ export default function EchoCompiler() {
   };
 
   const deployToGithub = async () => {
-    const token = prompt("Enter GitHub Token (repo, workflow, pages scopes):");
+    const token = prompt("Enter GitHub Token:");
     if (!token) return;
     setIsDeploying(true);
     const octokit = new Octokit({ auth: token });
@@ -89,14 +93,12 @@ export default function EchoCompiler() {
       try { await octokit.rest.repos.createForAuthenticatedUser({ name: repoName, auto_init: true }); await new Promise(r => setTimeout(r, 2000)); } catch (e) {}
       let sha; try { const { data }: any = await octokit.rest.repos.getContent({ owner: user.login, repo: repoName, path: "index.html" }); sha = data.sha; } catch (e) {}
       await octokit.rest.repos.createOrUpdateFileContents({ owner: user.login, repo: repoName, path: "index.html", message: "ECHO Build Sync", content: btoa(unescape(encodeURIComponent(generateHTMLWrapper()))), sha: sha });
-      try { await octokit.rest.repos.createPagesSite({ owner: user.login, repo: repoName, source: { branch: "main", path: "/" } }); } catch (e) {}
-      alert(`🚀 Successfully Deployed to GitHub Pages!`);
+      alert(`🚀 Successfully Deployed!`);
     } catch (error: any) { alert(`Error: ${error.message}`); } finally { setIsDeploying(false); }
   };
 
   return (
     <div className={`flex flex-col h-screen transition-all duration-500 ${THEMES[currentTheme].wrapper}`}>
-      {/* INJECTED CSS FOR EFFICIENCY */}
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
         .custom-scrollbar::-webkit-scrollbar { width: 5px; }
@@ -151,13 +153,26 @@ export default function EchoCompiler() {
               <ReactMarkdown 
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  code({node, inline, className, children, ...props}) {
-                    const match = /language-(\w+)/.exec(className || '')
-                    return !inline && match ? (
-                      <SyntaxHighlighter style={THEMES[currentTheme].syntax as any} language={match[1]} PreTag="div" className="rounded-2xl !my-6 shadow-2xl border border-white/5" {...props}>
+                  // FIXED: Removed 'inline' and added check for 'language-' match
+                  code({node, className, children, ...props}: any) {
+                    const match = /language-(\w+)/.exec(className || '');
+                    const isCodeBlock = !!match;
+                    
+                    return isCodeBlock ? (
+                      <SyntaxHighlighter 
+                        style={THEMES[currentTheme].syntax as any} 
+                        language={match[1]} 
+                        PreTag="div" 
+                        className="rounded-2xl !my-6 shadow-2xl border border-white/5" 
+                        {...props}
+                      >
                         {String(children).replace(/\n$/, '')}
                       </SyntaxHighlighter>
-                    ) : ( <code className={`${className} bg-slate-500/10 px-1.5 py-0.5 rounded text-sm`} {...props}>{children}</code> )
+                    ) : ( 
+                      <code className={`${className} bg-slate-500/10 px-1.5 py-0.5 rounded text-sm`} {...props}>
+                        {children}
+                      </code> 
+                    );
                   }
                 }}
               >
@@ -167,28 +182,20 @@ export default function EchoCompiler() {
           </div>
         </section>
       </main>
-      {/* FOOTER LABELING - SLIM VERSION */}
+
       <footer className="px-8 py-4 border-t border-slate-500/10 flex flex-col md:flex-row items-center justify-between text-[10px] font-bold uppercase tracking-[0.2em] gap-4">
-        
-        {/* Left Side: System Status */}
         <div className="flex items-center gap-4 opacity-30">
           <span className="flex items-center gap-1.5"><Cpu size={12}/> v2.1</span>
           <span className="h-1 w-1 rounded-full bg-current"></span>
           <span>STABLE_BUILD</span>
         </div>
-
-        {/* Center: Architecture Badge */}
         <div className="flex items-center bg-slate-500/5 px-4 py-1.5 rounded-full border border-slate-500/10 backdrop-blur-sm">
           <span className="opacity-40 text-[8px] mr-3">Architecture:</span>
           <span className="font-black opacity-80 tracking-widest">{myName.toUpperCase()}</span> 
           <span className="mx-2 opacity-20 font-light">x</span> 
           <span className="font-medium opacity-60 tracking-tighter">{aiPartner}</span>
         </div>
-        
-        {/* Right Side: Copyright */}
-        <div className="opacity-20 tracking-[0.4em] text-[8px]">
-          2026 © ECHO_SYSTEM
-        </div>
+        <div className="opacity-20 tracking-[0.4em] text-[8px]">2026 © ECHO_SYSTEM</div>
       </footer>
     </div>
   );
