@@ -1,0 +1,9 @@
+[submodule "rsvp"]
+	path = rsvp
+	url = https://github.com/Sharanx77/RSVP_SYSTEM.git
+[submodule "smart-resume-builder"]
+	path = smart-resume-builder
+	url = https://github.com/Sharanx77/smart-resume-builder.git
+[submodule "kairos"]
+	path = kairos
+	url = https://github.com/Sharanx77/kairosfinance.git
